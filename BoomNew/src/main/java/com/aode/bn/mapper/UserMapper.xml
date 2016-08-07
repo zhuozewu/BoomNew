@@ -3,7 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aode.bn.mapper.UserMapper">
-    <select id="findUserByName" parameterType="java.lang.String" resultMap="User">
+    <select id="findUserByName" parameterType="java.lang.String" resultType="User">
         SELECT * FROM user WHERE name = #{value}
+    </select>
+
+    <select id="findByLoginNameAndPassword" parameterType="User" resultType="User">
+        SELECT * FROM user WHERE name =#{name} AND password = #{password}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO user (name,password)VALUE (#{name},#{password})
+    </insert>
+
+    <select id="findAllUser" resultType="User">
+        SELECT * FROM user ;
     </select>
 </mapper>

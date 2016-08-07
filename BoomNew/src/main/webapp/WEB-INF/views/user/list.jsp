@@ -22,7 +22,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <c:if test="${empty requestScope.users }">
                               没有任何员工信息
-      </c:if>
+    </c:if>
+  <c:if test="${!empty requestScope.users }">
+      <table border="1" cellpadding="10" cellspacing="0">
+          <tr>
+              <th>name</th>
+              <th>password</th>
+          </tr>
+
+          <c:forEach items="${requestScope.users }" var="map">
+                <tr>
+                    <td>${user.name }</td>
+                    <td>${user.password }</td>
+                </tr>
+          </c:forEach>
+
+      </table>
+  </c:if>
       
   </body>
 </html>
