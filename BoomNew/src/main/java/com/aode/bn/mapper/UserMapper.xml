@@ -6,7 +6,12 @@
     <select id="findUserByName" parameterType="java.lang.String" resultType="User">
         SELECT * FROM user WHERE name = #{value}
     </select>
-
+    <select id="findById" parameterType="java.lang.Integer" resultType="User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
     <select id="findByLoginNameAndPassword" parameterType="User" resultType="User">
         SELECT * FROM user WHERE name =#{name} AND password = #{password}
     </select>
@@ -18,4 +23,8 @@
     <select id="findAllUser" resultType="User">
         SELECT * FROM user ;
     </select>
+    <update id="updateUser" parameterType="User">
+        UPDATE user SET name =(#{name}),password =(#{password})
+        WHERE id = #{id}
+    </update>
 </mapper>

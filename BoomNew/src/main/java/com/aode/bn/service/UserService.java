@@ -11,7 +11,11 @@ import java.util.List;
 @Service
 public interface UserService {
     User findByName(String name);
+    User findById(Integer id);
     User findByLoginNameAndPassword(User user);
     void addUser(User user);
     List<User> findAllUser();
+    void updateUser(User user);
+
+    void deleteUser(Integer id);
 }

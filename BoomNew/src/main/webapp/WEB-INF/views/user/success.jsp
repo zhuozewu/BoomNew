@@ -7,6 +7,6 @@
   <body>
     <b>success</b>
     
-    user:${sessionScope.loginuser }
+    user:${requestScope.loginuser }
   </body>
 </html>

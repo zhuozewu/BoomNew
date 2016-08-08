@@ -6,10 +6,10 @@
 </head>
 <body>
 <h2>Hello World!</h2>
-<a href="user/mybatistest">MybatisTest</a>
-<a href="user/register">注册</a>
-<a href="/user/list">list</a>
-<form action="user/login" method="get">
+<a href="user/2">TESTGETUSER</a>
+<a href="register">注册</a>
+<a href="/userList">list</a>
+<form action="login" method="get">
     name:<input type="text" name="name"/><br>
     password:<input type="password" name="password"><br>
     <input type="submit" value="submit"/>

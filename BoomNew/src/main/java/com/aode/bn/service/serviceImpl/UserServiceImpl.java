@@ -22,6 +22,10 @@ public class UserServiceImpl implements UserService{
         return userMapper.findUserByName(name);
     }
 
+    public User findById(Integer id) {
+        return userMapper.findById(id);
+    }
+
     public User findByLoginNameAndPassword(User user) {
 
         return userMapper.findByLoginNameAndPassword(user);
@@ -34,5 +38,13 @@ public class UserServiceImpl implements UserService{
 
     public List<User> findAllUser() {
         return userMapper.findAllUser();
+    }
+
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
+    }
+
+    public void deleteUser(Integer id) {
+        userMapper.deleteUser(id);
     }
 }

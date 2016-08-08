@@ -15,5 +15,7 @@ public interface UserMapper {
     User findByLoginNameAndPassword(User user);
     void addUser(User user);
     List<User> findAllUser();
-
+    void updateUser(User user);
+    User findById(Integer id);
+    void deleteUser(Integer id);
 }

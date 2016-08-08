@@ -15,12 +15,13 @@
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
-	
-	
+    <!-- 该配置可以让我们去访问一些静态资源，如jQuery资源包-->
+    <mvc:default-servlet-handler/>
+    <!--  当你配置mvc:default-servlet-handler这个标签时，需要添加该配置，不然controller层会失效-->
+    <mvc:annotation-driven/>
+    <!-- 配置自定义的拦截器 -->
 	<mvc:interceptors>
-		<!-- 配置自定义的拦截器 -->
+		<!-- 字符编码修正拦截器 -->
 		<bean class="com.aode.bn.interceptors.CharacterEncodingInterceptor"></bean>
-		<!-- 配置 LocaleChanceInterceptor -->
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
 	</mvc:interceptors>
 </beans>

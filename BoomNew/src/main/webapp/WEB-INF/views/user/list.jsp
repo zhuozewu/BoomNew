@@ -9,17 +9,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'register.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+
+      <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+      <script type="text/javascript">
+          $(function(){
+              $(".delete").click(function(){
+                  var href = $(this).attr("href");
+                  $("form").attr("action", href).submit();
+                  return false;
+              });
+          })
+      </script>
   </head>
   
   <body>
+    <form action="" method="POST">
+        <input type="hidden" name="_method" value="DELETE"/>
+    </form>
     <c:if test="${empty requestScope.users }">
                               没有任何员工信息
     </c:if>
@@ -28,12 +34,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
               <th>name</th>
               <th>password</th>
+              <th>修改</th>
+              <th>删除</th>
           </tr>
 
-          <c:forEach items="${requestScope.users }" var="map">
+          <c:forEach items="${requestScope.users }" var="user">
                 <tr>
                     <td>${user.name }</td>
                     <td>${user.password }</td>
+                    <td><a href="/input/${user.id}">修改</a></td>
+                    <td><a class="delete" href="/user/${user.id}">删除</a></td>
                 </tr>
           </c:forEach>
 
