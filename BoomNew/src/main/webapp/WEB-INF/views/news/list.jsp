@@ -26,24 +26,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="" method="POST">
         <input type="hidden" name="_method" value="DELETE"/>
     </form>
-    <c:if test="${empty requestScope.users }">
+    <c:if test="${empty requestScope.newsList }">
                               没有任何员工信息
     </c:if>
-  <c:if test="${!empty requestScope.users }">
+  <c:if test="${!empty requestScope.newsList }">
       <table border="1" cellpadding="10" cellspacing="0">
           <tr>
-              <th>name</th>
-              <th>password</th>
-              <th>修改</th>
-              <th>删除</th>
+              <th>title</th>
+              <th>content</th>
+              <th>postTime</th>
+              <th>type</th>
+              <th>replyCount</th>
+              <th>status</th>
+              <th>author</th>
+
           </tr>
 
-          <c:forEach items="${requestScope.users }" var="user">
+          <c:forEach items="${requestScope.newsList }" var="news">
                 <tr>
-                    <td>${user.name }</td>
-                    <td>${user.password }</td>
-                    <td><a href="/userInput/${user.id}">修改</a></td>
-                    <td><a class="delete" href="/user/${user.id}">删除</a></td>
+                    <td>${news.title }</td>
+                    <td>${news.content }</td>
+                    <td>${news.postTime }</td>
+                    <td>${news.type }</td>
+                    <td>${news.replyCount }</td>
+                    <td>${news.status }</td>
+                    <td>${news.author }</td>
+                    <td><a href="/newsInput/${news.id}">修改</a></td>
+                    <td><a class="delete" href="/news/${news.id}">删除</a></td>
                 </tr>
           </c:forEach>
 

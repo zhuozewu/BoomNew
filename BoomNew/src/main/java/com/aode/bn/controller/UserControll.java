@@ -97,9 +97,8 @@ public class UserControll {
     /*
     * 转到输入页面
     */
-    @RequestMapping(value ="/input/{id}",method =RequestMethod.GET)
+    @RequestMapping(value ="/userInput/{id}",method =RequestMethod.GET)
     public String input(@PathVariable("id") Integer id,Map<String,Object> map){
-        System.out.println(userService.findById(id).getName());
         map.put("user",userService.findById(id));
         return "user/editUI";
     }

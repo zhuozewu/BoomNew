@@ -9,6 +9,7 @@
 <a href="user/2">TESTGETUSER</a>
 <a href="register">注册</a>
 <a href="/userList">list</a>
+<a href="/newsInput">addNews</a>
 <form action="login" method="get">
     name:<input type="text" name="name"/><br>
     password:<input type="password" name="password"><br>
