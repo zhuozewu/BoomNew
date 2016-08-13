@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aode.bn.mapper.NewsMapper" >
+    <!--定义news返回值，将user映射到news返回值中-->
+    <resultMap id="NewsResultMap" type="News">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="postTime" property="postTime"/>
+        <result column="type" property="type"/>
+        <result column="replyCount" property="replyCount"/>
+        <result column="status" property="status"/>
+        <association property="author" javaType="User">
+            <id column="author_id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="password" property="password"/>
+        </association>
+    </resultMap>
+    <!-- 增加用户 -->
+    <insert id="addNews" parameterType="News">
+        INSERT INTO news(title,content,postTime,type,author_id)
+        VALUE (#{title},#{content},#{postTime},#{type},#{author.id})
+    </insert>
+    <!-- 更新用户 -->
+    <update id="updateNews" parameterType="News">
+        UPDATE news SET title=#{title},content =#{content},postTime =#{postTime},type =#{type},author_id =#{author.id}
+        WHERE id = #{id}
+    </update>
+    <!-- 找到所有用户 -->
+    <!--通过左外连接找到User表-->
+    <select id="findAllNews" resultMap="NewsResultMap">
+        SELECT
+          u.id,
+          u.name,
+          u.password,
+          n.id ,
+          n.title ,
+          n.content ,
+          n.postTime ,
+          n.type ,
+          n.replyCount ,
+          n.status
+        FROM
+          news n
+        LEFT JOIN
+          user u
+        ON
+          u.id = n.author_id
+    </select>
+    <!-- 通过id用户 通过联表查询得到user-->
+    <select id="findNewsById" parameterType="java.lang.Integer" resultMap="NewsResultMap">
+        SELECT * FROM news n,user u WHERE u.id = n.author_id and n.id = #{id}
+    </select>
+    <!-- 删除用户 -->
+    <delete id="deleteNews" parameterType="java.lang.Integer">
+        DELETE FROM news WHERE id = #{id}
+    </delete>
+</mapper>
