@@ -42,11 +42,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <th>author</th>
               <th>修改</th>
               <th>删除</th>
+              <th>评论</th>
           </tr>
 
-          <c:forEach items="${requestScope.newsList }" var="news">
+          <c:forEach items="${requestScope.newsList }" var="news" >
                 <tr>
-                    <td>${news.id}</td>
+                    <c:set var="nid" scope="session" value="${news.nid }"/>
+                    <c:set var="uid" scope="session" value="${news.author.id }"/>
+                    <td>${news.nid}</td>
                     <td>${news.title }</td>
                     <td>${news.content }</td>
                     <td>${news.postTime }</td>
@@ -54,12 +57,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td>${news.replyCount }</td>
                     <td>${news.status }</td>
                     <td>${news.author.name }</td>
-                    <td><a href="/newsInput/${news.id }">修改</a></td>
-                    <td><a class="/delete" href="/news/${news.id }">删除</a></td>
+                    <td><a href="/newsInput/${news.nid }" >修改</a></td>
+                    <td><a class="delete" href="/news/${news.nid }">删除</a></td>
+                    <td><a href="/replyInput">评论</a></td>
                 </tr>
           </c:forEach>
 
       </table>
+      <a href="/newsInput" >addNews</a>
   </c:if>
       
   </body>

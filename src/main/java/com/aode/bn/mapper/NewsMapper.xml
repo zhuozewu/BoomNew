@@ -5,7 +5,7 @@
 <mapper namespace="com.aode.bn.mapper.NewsMapper" >
     <!--定义news返回值，将user映射到news返回值中-->
     <resultMap id="NewsResultMap" type="News">
-        <id column="id" property="id"/>
+        <id column="nid" property="nid"/>
         <result column="title" property="title"/>
         <result column="content" property="content"/>
         <result column="postTime" property="postTime"/>
@@ -25,8 +25,8 @@
     </insert>
     <!-- 更新用户 -->
     <update id="updateNews" parameterType="News">
-        UPDATE news SET title=#{title},content =#{content},postTime =#{postTime},type =#{type},author_id =#{author.id}
-        WHERE id = #{id}
+        UPDATE news SET title=#{title},content =#{content},type =#{type},author_id =#{author.id}
+        WHERE nid = #{nid}
     </update>
     <!-- 找到所有用户 -->
     <!--通过左外连接找到User表-->
@@ -35,7 +35,7 @@
           u.id,
           u.name,
           u.password,
-          n.id ,
+          n.nid ,
           n.title ,
           n.content ,
           n.postTime ,
@@ -51,10 +51,10 @@
     </select>
     <!-- 通过id用户 通过联表查询得到user-->
     <select id="findNewsById" parameterType="java.lang.Integer" resultMap="NewsResultMap">
-        SELECT * FROM news n,user u WHERE u.id = n.author_id and n.id = #{id}
+        SELECT * FROM news n,user u WHERE u.id = n.author_id and n.nid = #{id}
     </select>
     <!-- 删除用户 -->
     <delete id="deleteNews" parameterType="java.lang.Integer">
-        DELETE FROM news WHERE id = #{id}
+        DELETE FROM news WHERE nid = #{id}
     </delete>
 </mapper>

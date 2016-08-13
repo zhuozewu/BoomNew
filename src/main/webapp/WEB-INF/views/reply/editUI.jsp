@@ -7,17 +7,13 @@
   </head>
   
   <body>
-  <form:form action="${pageContext.request.contextPath }/news" modelAttribute="news" method="POST" acceptCharset="utf-8">
-      <c:if test="${news.nid !=null}">
-          <form:hidden path="nid"/>
+  <form:form action="${pageContext.request.contextPath }/reply" modelAttribute="reply" method="POST" acceptCharset="utf-8">
+      <c:if test="${reply.rid !=null}">
+          <form:hidden path="rid"/>
           <input type="hidden" name="_method" value="PUT"/>
       </c:if>
-	  <form:input path="title"/>
 	  <form:textarea path="content"/>
-      <form:input path="type"/>
-      <form:select path="author.id" items = "${users}" itemLabel="name" itemValue="id">
-      </form:select>
-      </select>
+      <c:out value="${user.name}"/>
 	<input type="submit" value="Submit"/>
   </form:form>
   </body>

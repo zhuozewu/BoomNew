@@ -18,11 +18,10 @@ public class NewsController {
     private NewsService newsService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "news",method = RequestMethod.POST)
-    public String addNews(@RequestParam(value="userId",required=false)Integer userId,News news){
-        news.setAuthor(userService.findById(userId));
+    @RequestMapping(value ="news",method = RequestMethod.POST)
+    public String addNews(News news){
         newsService.addNews(news);
-        return "news/list";
+        return "redirect:/newsList";
     }
     /*
      *更新用户
@@ -52,6 +51,15 @@ public class NewsController {
     @RequestMapping(value ="/newsInput/{id}",method =RequestMethod.GET)
     public String input(@PathVariable("id") Integer id,Map<String,Object> map){
         map.put("news",newsService.findById(id));
+        map.put("users",userService.findAllUser());
+        return "news/editUI";
+    }
+    /*
+     * 转到新闻输入页面
+     */
+    @RequestMapping(value ="/newsInput",method =RequestMethod.GET)
+    public String input(Map<String,Object> map){
+        map.put("news",new News());
         map.put("users",userService.findAllUser());
         return "news/editUI";
     }
