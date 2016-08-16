@@ -13,7 +13,6 @@
           <input type="hidden" name="_method" value="PUT"/>
       </c:if>
 	  <form:textarea path="content"/>
-      <c:out value="${user.name}"/>
 	<input type="submit" value="Submit"/>
   </form:form>
   </body>

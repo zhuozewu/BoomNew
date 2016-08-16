@@ -26,27 +26,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="" method="POST">
         <input type="hidden" name="_method" value="DELETE"/>
     </form>
-    <c:if test="${empty requestScope.users }">
+    <c:if test="${empty requestScope.replys }">
                               没有任何员工信息
     </c:if>
-  <c:if test="${!empty requestScope.users }">
+  <c:if test="${!empty requestScope.replys }">
       <table border="1" cellpadding="10" cellspacing="0">
           <tr>
-              <th>name</th>
-              <th>password</th>
-              <th>查看用户所发表的新闻</th>
-              <th>修改</th>
+              <th>id</th>
+              <th>title</th>
+              <th>content</th>
+              <th>postTime</th>
+              <th>replyCount</th>
+              <th>author</th>
               <th>删除</th>
+              <th>评论</th>
           </tr>
 
-          <c:forEach items="${requestScope.users }" var="user">
+          <c:forEach items="${requestScope.replys }" var="reply" >
                 <tr>
-                    <td>${user.name }</td>
-                    <td>${user.password }</td>
-                    <td><a href="/userInput/${user.id}">修改</a></td>
-                    <td><a class="delete" href="/user/${user.id}">删除</a></td>
-                    <td><a href="/findAllNewsByUserId/${user.id}">查看用户所发表的新闻</a></td>
-                    <td><a href="/findAllReplyByUserId/${user.id}">查看用户所发表的新闻</a></td>
+                    <td>${reply.rid}</td>
+                    <td>${reply.news.title }</td>
+                    <td>${reply.content }</td>
+                    <td>${reply.postTime }</td>
+                    <td>${reply.replyCount }</td>
+                    <td>${reply.author.name }</td>
+                    <td><a class="delete" href="/news/${reply.rid }">删除</a></td>
+                    <!--利用ant风格的格式来传值-->
+                    <td><a href="/replyInput/${reply.author.id}_-1_${reply.rid}">评论</a></td>
                 </tr>
           </c:forEach>
 

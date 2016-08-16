@@ -6,10 +6,11 @@ import java.util.List;
  * Created by 匆匆の过客 on 2016/8/6.
  */
 public class User {
-    private Long id ;
+    private Integer id ;
     private String name;
     private String password ;
 
+    private Role role ;
     private List<News> news ; //用户所发表的新闻列表
 
     public List<News> getNews() {
@@ -19,10 +20,10 @@ public class User {
     public void setNews(List<News> news) {
         this.news = news;
     }
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getName() {

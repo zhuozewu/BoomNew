@@ -1,5 +1,6 @@
 package com.aode.bn.controller;
 
+import com.aode.bn.annotation.Auth;
 import com.aode.bn.domain.News;
 import com.aode.bn.service.NewsService;
 import com.aode.bn.service.UserService;
@@ -13,7 +14,7 @@ import java.util.Map;
  * Created by 匆匆の过客 on 2016/8/9.
  */
 @Controller
-public class NewsController {
+public class NewsController{
     @Autowired
     private NewsService newsService;
     @Autowired
@@ -40,6 +41,7 @@ public class NewsController {
         return "redirect:/newsList";
     }
 
+    @Auth("newsList")
     @RequestMapping("/newsList")
     public String list(Map<String,Object> map){
         map.put("newsList",newsService.findAllNews());

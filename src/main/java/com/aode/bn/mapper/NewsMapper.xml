@@ -25,14 +25,14 @@
     </insert>
     <!-- 更新用户 -->
     <update id="updateNews" parameterType="News">
-        UPDATE news SET title=#{title},content =#{content},type =#{type},author_id =#{author.id}
+        UPDATE news SET title=#{title},content =#{content},type =#{type},author_id =#{author.id} ,replyCount =#{replyCount}
         WHERE nid = #{nid}
     </update>
     <!-- 找到所有用户 -->
     <!--通过左外连接找到User表-->
     <select id="findAllNews" resultMap="NewsResultMap">
         SELECT
-          u.id,
+          u.id as author_id,
           u.name,
           u.password,
           n.nid ,
@@ -49,6 +49,28 @@
         ON
           u.id = n.author_id
     </select>
+
+
+    <select id="findAllNewsByUserId" parameterType="java.lang.Integer" resultMap="NewsResultMap">
+        SELECT
+        u.id as author_id,
+        u.name,
+        u.password,
+        n.nid ,
+        n.title ,
+        n.content ,
+        n.postTime ,
+        n.type ,
+        n.replyCount ,
+        n.status
+        FROM
+        news n ,user u
+        WHERE
+        n.author_id = #{value }
+		AND
+		u.id  = #{value }
+    </select>
+
     <!-- 通过id用户 通过联表查询得到user-->
     <select id="findNewsById" parameterType="java.lang.Integer" resultMap="NewsResultMap">
         SELECT * FROM news n,user u WHERE u.id = n.author_id and n.nid = #{id}

@@ -6,16 +6,16 @@ import java.util.List;
  * Created by 匆匆の过客 on 2016/8/13.
  */
 public class Reply extends Article{
-    private Long rid ;
+    private Integer rid ;
     private News news;  //评论所属的新闻
     private Reply reply; //评论的父评论
     private List<Reply> replys;  //回复评论的评论的集合
 
-    public Long getRid() {
+    public Integer getRid() {
         return rid;
     }
 
-    public void setRid(Long rid) {
+    public void setRid(Integer rid) {
         this.rid = rid;
     }
 

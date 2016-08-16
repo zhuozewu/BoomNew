@@ -16,4 +16,6 @@ public interface NewsMapper {
     News findNewsById(Integer id);
 
     void updateNews(News news);
+
+    List<News> findAllNewsByUserId(Integer id);
 }

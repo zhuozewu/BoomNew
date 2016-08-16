@@ -1,5 +1,7 @@
 package com.aode.bn.interceptors;
 
+import com.aode.bn.annotation.Auth;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,7 +25,14 @@ public class CharacterEncodingInterceptor implements HandlerInterceptor{
 
     public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
                              Object arg2) throws Exception {
-        arg0.setCharacterEncoding("UTF-8");
-        return true;
+        Auth auth = ((HandlerMethod) arg2).getMethod().getAnnotation(Auth.class);
+        boolean flag = true;
+        if (auth != null) {// 有权限控制的就要检查
+            System.out.println(arg0.getMethod());
+            arg0.setCharacterEncoding("UTF-8");
+            System.out.println(auth.value());
+            flag = true;
+        }
+        return flag;
     }
 }

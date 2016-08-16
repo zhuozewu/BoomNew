@@ -42,4 +42,8 @@ public class NewsServiceImpl implements NewsService {
     public void updateNews(News news) {
         newsMapper.updateNews(news);
     }
+
+    public List<News> findAllNewsByUserId(Integer id) {
+        return newsMapper.findAllNewsByUserId(id);
+    }
 }

@@ -16,4 +16,6 @@ public interface NewsService {
     News findById(Integer id);
 
     void updateNews(News news);
+
+    List<News> findAllNewsByUserId(Integer id);
 }

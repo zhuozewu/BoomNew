@@ -43,12 +43,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <th>修改</th>
               <th>删除</th>
               <th>评论</th>
+              <th>查看所有评论</th>
           </tr>
 
           <c:forEach items="${requestScope.newsList }" var="news" >
                 <tr>
-                    <c:set var="nid" scope="session" value="${news.nid }"/>
-                    <c:set var="uid" scope="session" value="${news.author.id }"/>
                     <td>${news.nid}</td>
                     <td>${news.title }</td>
                     <td>${news.content }</td>
@@ -59,7 +58,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td>${news.author.name }</td>
                     <td><a href="/newsInput/${news.nid }" >修改</a></td>
                     <td><a class="delete" href="/news/${news.nid }">删除</a></td>
-                    <td><a href="/replyInput">评论</a></td>
+                    <!--利用ant风格的格式来传值-->
+                    <td><a href="/replyInput/${news.author.id}_${news.nid}_-1">评论</a></td>
+                    <td><a href="/allReplyByNewsId/${news.nid}">查看该新闻所有评论</a></td>
                 </tr>
           </c:forEach>
 

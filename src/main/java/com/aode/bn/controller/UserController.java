@@ -1,6 +1,8 @@
 package com.aode.bn.controller;
 
 import com.aode.bn.domain.User;
+import com.aode.bn.service.NewsService;
+import com.aode.bn.service.ReplyService;
 import com.aode.bn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,18 +16,41 @@ import java.util.Map;
  */
 
 @Controller
-public class UserControll {
+public class UserController extends RoleController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private NewsService newsService;
+    @Autowired
+    private ReplyService replyService;
 
     private User user ;
 
-
-    @RequestMapping("mybatistest")
-    public String mybatisTest(){
-        user = userService.findByName("张三");
-        return "user/success";
+    /**
+     * 根据用户的id查找用户所发表的文章
+     * @param id 用户id
+     * @param map
+     * @return 用户所发表的新闻的集合
+     */
+    @RequestMapping("findAllNewsByUserId/{id}")
+    public String findAllNewsByUserId(@PathVariable("id") Integer id ,Map<String,Object> map){
+        map.put("newsList",newsService.findAllNewsByUserId(id));
+        return "news/list";
     }
+
+
+    /**
+     * 根据用户的id查找用户所发表的评论
+     * @param id 用户id
+     * @param map
+     * @return 用户所发表的评论
+     */
+    @RequestMapping("findAllReplyByUserId/{id}")
+    public String findAllReplyByUserId(@PathVariable("id") Integer id ,Map<String,Object> map){
+        map.put("replys",replyService.findAllReplyById(id));
+        return "reply/list";
+    }
+
     @RequestMapping(value ="/user/{id}" ,method = RequestMethod.GET)
     public String getUserById(@PathVariable("id") Integer id ,Map<String,Object> map){
         map.put("user" ,userService.findById(id));
