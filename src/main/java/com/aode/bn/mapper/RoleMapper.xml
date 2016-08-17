@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aode.bn.mapper.RoleMapper" >
+    <insert id="addRole" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO role(role_name,description)
+        VALUE (#{roleName},#{description})
+    </insert>
+
+    <insert id="insertKFTable">
+        INSERT INTO role_privilege(role_id,privilege_id)
+        VALUE (#{0},#{1})
+    </insert>
+    
+    <select id="findRoleById" parameterType="java.lang.Integer" resultType="Role">
+        SELECT * FROM role WHERE  id = #{value } ;
+    </select>
+</mapper>
