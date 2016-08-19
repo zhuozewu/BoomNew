@@ -16,5 +16,21 @@
 	<form:password path="password"/>
 	<input type="submit" value="Submit"/>
   </form:form>
+  <table>
+    <c:if test="${roles !=null}">
+
+            <tr>
+                <th>岗位</th>
+                <th>为用户设立岗位</th>
+            </tr>
+        <c:forEach items="${requestScope.roles}" var="role">
+            <tr>
+                 <td>${role.roleName }</td>
+                 <td><a href="${pageContext.request.contextPath }/setRole/${user.id}_${role.id}">为用户设立岗位</a></td>
+             </tr>
+
+        </c:forEach>
+    </c:if>
+  </table>
   </body>
 </html>

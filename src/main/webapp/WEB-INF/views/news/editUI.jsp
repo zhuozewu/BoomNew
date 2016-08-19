@@ -17,7 +17,7 @@
       <form:input path="type"/>
       <form:select path="author.id" items = "${users}" itemLabel="name" itemValue="id">
       </form:select>
-      </select>
+      <input type="file">
 	<input type="submit" value="Submit"/>
   </form:form>
   </body>

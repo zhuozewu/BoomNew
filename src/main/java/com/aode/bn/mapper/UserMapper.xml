@@ -3,8 +3,42 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aode.bn.mapper.UserMapper">
-    <select id="findUserByName" parameterType="java.lang.String" resultType="User">
-        SELECT * FROM user WHERE name = #{value}
+    <resultMap id="userResultMap" type="User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <association property="role"  javaType="Role">
+            <id column="role_id" property="id"/>
+            <result column="role_name" property="roleName"/>
+            <result column="description" property="description"/>
+            <collection property="privileges" javaType="list" ofType="Privilege">
+                <id  property="id" column="pid"/>
+                <result column="privilege" property="privilege"/>
+                <result column="url" property="url"/>
+            </collection>
+        </association>
+    </resultMap>
+    <select id="findUserByName" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT
+          u.id,
+          u.name,
+          u.password ,
+          r.id as role_id,
+          r.role_name as role_name,
+          r.description ,
+		  p.id as pid,
+		  p.privilege,
+		  p.url ,
+          x.role_id ,
+          x.privilege_id
+        FROM
+          user u,role r , role_privilege x
+		LEFT OUTER JOIN
+		  privilege p
+		ON
+		  p.id = x.privilege_id
+		WHERE
+		  r.id = x.role_id and u.name = #{value}
     </select>
     <select id="findById" parameterType="java.lang.Integer" resultType="User">
         SELECT * FROM user WHERE id = #{id}
@@ -19,11 +53,30 @@
         INSERT INTO user (name,password)VALUE (#{name},#{password})
     </insert>
 
-    <select id="findAllUser" resultType="User">
-        SELECT * FROM user ;
+    <select id="findAllUser" resultMap="userResultMap">
+        SELECT
+          u.id,
+          u.name,
+          u.password ,
+          r.id as role_id,
+          r.role_name as role_name,
+          r.description ,
+		  p.id as pid,
+		  p.privilege,
+		  p.url ,
+          x.role_id ,
+          x.privilege_id
+        FROM
+          user u,role r , role_privilege x
+		LEFT OUTER JOIN
+		  privilege p
+		ON
+		  p.id = x.privilege_id
+		WHERE
+		  r.id = x.role_id;
     </select>
     <update id="updateUser" parameterType="User">
-        UPDATE user SET name =(#{name}),password =(#{password})
+        UPDATE user SET name =(#{name}),password =(#{password}),role_id = (#{role.id})
         WHERE id = #{id}
     </update>
 </mapper>

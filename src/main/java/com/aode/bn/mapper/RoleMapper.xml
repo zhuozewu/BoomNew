@@ -3,6 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aode.bn.mapper.RoleMapper" >
+
+    <resultMap id="roleResultMap" type="Role">
+        <id column="id" property="id"/>
+        <result column="role_name" property="roleName"/>
+        <result column="description" property="description"/>
+        <collection property="privileges" javaType="list" ofType="Privilege">
+            <id  property="id" column="pid"/>
+            <result column="privilege" property="privilege"/>
+            <result column="url" property="url"/>
+        </collection>
+    </resultMap>
+
+
     <insert id="addRole" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO role(role_name,description)
         VALUE (#{roleName},#{description})
@@ -12,7 +25,29 @@
         INSERT INTO role_privilege(role_id,privilege_id)
         VALUE (#{0},#{1})
     </insert>
-    
+
+    <select id="findAllRole" resultMap="roleResultMap">
+        SELECT
+          r.id as id,
+          r.role_name as role_name,
+          r.description ,
+		  p.id as pid,
+		  p.privilege,
+		  p.url ,
+          x.role_id ,
+          x.privilege_id
+        FROM
+          role r , role_privilege x
+		LEFT OUTER JOIN
+		  privilege p
+		ON
+		  p.id = x.privilege_id
+		WHERE
+		  r.id = x.role_id;
+
+    </select>
+
+
     <select id="findRoleById" parameterType="java.lang.Integer" resultType="Role">
         SELECT * FROM role WHERE  id = #{value } ;
     </select>

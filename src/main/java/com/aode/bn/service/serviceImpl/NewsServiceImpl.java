@@ -7,6 +7,7 @@ import com.aode.bn.mapper.UserMapper;
 import com.aode.bn.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * Created by 匆匆の过客 on 2016/8/9.
  */
+@Transactional
 @Service
 public class NewsServiceImpl implements NewsService {
     @Autowired

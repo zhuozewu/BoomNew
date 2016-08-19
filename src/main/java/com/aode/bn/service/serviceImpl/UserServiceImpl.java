@@ -5,12 +5,14 @@ import com.aode.bn.mapper.UserMapper;
 import com.aode.bn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by 匆匆の过客 on 2016/8/6.
  */
+@Transactional
 @Service
 public class UserServiceImpl implements UserService{
     @Autowired
@@ -27,8 +29,12 @@ public class UserServiceImpl implements UserService{
     }
 
     public User findByLoginNameAndPassword(User user) {
-
-        return userMapper.findByLoginNameAndPassword(user);
+        if(!user.getPassword().equals(findByName(user.getName()).getPassword())){
+            System.out.println("密码错了");
+            return null;
+        }else {
+            return userMapper.findUserByName(user.getName());
+        }
     }
 
     public void addUser(User user) {

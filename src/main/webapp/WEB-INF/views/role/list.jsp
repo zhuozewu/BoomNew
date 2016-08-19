@@ -26,46 +26,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="" method="POST">
         <input type="hidden" name="_method" value="DELETE"/>
     </form>
-    <c:if test="${empty requestScope.newsList }">
+    <c:if test="${empty requestScope.roles }">
                               没有任何员工信息
     </c:if>
-  <c:if test="${!empty requestScope.newsList }">
+  <c:if test="${!empty requestScope.roles }">
       <table border="1" cellpadding="10" cellspacing="0">
           <tr>
               <th>id</th>
-              <th>title</th>
-              <th>content</th>
-              <th>postTime</th>
-              <th>type</th>
-              <th>replyCount</th>
-              <th>status</th>
-              <th>author</th>
+              <th>name</th>
+              <th>description</th>
+              <th>privileges</th>
               <th>修改</th>
               <th>删除</th>
               <th>评论</th>
               <th>查看所有评论</th>
           </tr>
 
-          <c:forEach items="${requestScope.newsList }" var="news" >
+          <c:forEach items="${requestScope.roles }" var="role" >
                 <tr>
-                    <td>${news.nid}</td>
-                    <td>${news.title }</td>
-                    <td>${news.content }</td>
-                    <td>${news.postTime }</td>
-                    <td>${news.type }</td>
-                    <td>${news.replyCount }</td>
-                    <td>${news.status }</td>
-                    <td>${news.author.name }</td>
-                    <td><a href="/newsInput/${news.nid }" >修改</a></td>
-                    <td><a class="delete" href="/news/${news.nid }">删除</a></td>
-                    <!--利用ant风格的格式来传值-->
-                    <td><a href="/replyInput/${news.author.id}_${news.nid}_-1">评论</a></td>
-                    <td><a href="/allReplyByNewsId/${news.nid}">查看该新闻所有评论</a></td>
+                    <td>${role.id}</td>
+                    <td>${role.roleName }</td>
+                    <td>${role.description }</td>
+                    <td>
+                        <c:forEach items="${role.privileges }" var="privilege" >
+                            ${privilege.privilege} <br>
+                        </c:forEach>
+                    </td>
+                    <td><a href="/roleInput/${role.id }" >修改</a></td>
+                    <td><a class="delete" href="/role/${role.id }">删除</a></td>
                 </tr>
           </c:forEach>
-
       </table>
-      <a href="/newsInput" >addNews</a>
   </c:if>
       
   </body>

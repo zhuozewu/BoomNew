@@ -22,6 +22,6 @@
     <!-- 配置自定义的拦截器 -->
 	<mvc:interceptors>
 		<!-- 字符编码修正拦截器 -->
-		<bean class="com.aode.bn.interceptors.CharacterEncodingInterceptor"></bean>
+		<bean class="com.aode.bn.interceptors.AuthInterceptor"></bean>
 	</mvc:interceptors>
 </beans>

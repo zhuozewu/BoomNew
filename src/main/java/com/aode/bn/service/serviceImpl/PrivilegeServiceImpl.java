@@ -5,12 +5,14 @@ import com.aode.bn.mapper.PrivilegeMapper;
 import com.aode.bn.service.PrivilegeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by 匆匆の过客 on 2016/8/17.
  */
+@Transactional
 @Service
 public class PrivilegeServiceImpl implements PrivilegeService{
     @Autowired

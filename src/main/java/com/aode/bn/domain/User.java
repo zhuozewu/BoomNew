@@ -10,7 +10,7 @@ public class User {
     private String name;
     private String password ;
 
-    private Role role ;
+    private Role role ; //一个用户只能拥有一个岗位（如果采用岗位与用户多对多，则权限认证将会变得繁琐，所以我这里采用岗位和用户一对多）
     private List<News> news ; //用户所发表的新闻列表
 
     public List<News> getNews() {
@@ -37,5 +37,13 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

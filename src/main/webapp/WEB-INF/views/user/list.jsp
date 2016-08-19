@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <tr>
               <th>name</th>
               <th>password</th>
+              <th>岗位</th>
               <th>查看用户所发表的新闻</th>
               <th>修改</th>
               <th>删除</th>
@@ -43,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <tr>
                     <td>${user.name }</td>
                     <td>${user.password }</td>
+                    <td>${user.role.roleName }</td>
                     <td><a href="/userInput/${user.id}">修改</a></td>
                     <td><a class="delete" href="/user/${user.id}">删除</a></td>
                     <td><a href="/findAllNewsByUserId/${user.id}">查看用户所发表的新闻</a></td>
