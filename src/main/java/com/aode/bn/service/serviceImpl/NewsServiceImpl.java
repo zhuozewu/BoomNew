@@ -2,9 +2,12 @@ package com.aode.bn.service.serviceImpl;
 
 
 import com.aode.bn.domain.News;
+import com.aode.bn.domain.Picture;
 import com.aode.bn.mapper.NewsMapper;
+import com.aode.bn.mapper.PictureMapper;
 import com.aode.bn.mapper.UserMapper;
 import com.aode.bn.service.NewsService;
+import com.aode.bn.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +21,15 @@ import java.util.List;
 @Transactional
 @Service
 public class NewsServiceImpl implements NewsService {
+
+    final String savePath = "/images/";
     @Autowired
     private NewsMapper newsMapper;
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PictureMapper pictureMapper ;
 
     public void addNews(News news) {
         news.setPostTime(new Date()); //设置新闻的发表时间
@@ -37,8 +45,9 @@ public class NewsServiceImpl implements NewsService {
     }
 
     public News findById(Integer id) {
-        System.out.println("^^"+newsMapper.findNewsById(id).getAuthor().getName());
-        return newsMapper.findNewsById(id);
+        News news = newsMapper.findNewsById(id);
+        FileUploadUtil.pictureDownload(pictureMapper.findPictureByNewsId(id),savePath);
+        return news;
     }
 
     public void updateNews(News news) {
@@ -47,5 +56,26 @@ public class NewsServiceImpl implements NewsService {
 
     public List<News> findAllNewsByUserId(Integer id) {
         return newsMapper.findAllNewsByUserId(id);
+    }
+
+    public void addPicture(Picture pic) {
+        pictureMapper.add(pic);
+        System.out.println(pic.getId());
+        String picUrl = savePath+pic.getId()+pic.getSuffix();
+        News news = newsMapper.findNewsById(pic.getNews().getNid());
+        news.setPicUrl(picUrl);
+        newsMapper.updateNews(news);
+    }
+
+    public String findPictureByNewsId(Integer id) {
+        Picture picture = pictureMapper.findPictureByNewsId(id);
+        return FileUploadUtil.pictureDownload(picture,savePath);
+    }
+
+    public void upLoadAllPicture() {
+        List<Picture> picList = pictureMapper.findAllPicture();
+        for(Picture pic : picList){
+            FileUploadUtil.pictureDownload(pic,savePath);
+        }
     }
 }

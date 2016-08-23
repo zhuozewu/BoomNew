@@ -1,6 +1,7 @@
 package com.aode.bn.service;
 
 import com.aode.bn.domain.News;
+import com.aode.bn.domain.Picture;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +19,11 @@ public interface NewsService {
     void updateNews(News news);
 
     List<News> findAllNewsByUserId(Integer id);
+
+    void addPicture(Picture pic);
+
+
+    String findPictureByNewsId(Integer id );
+
+    void upLoadAllPicture();
 }

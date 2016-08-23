@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aode.bn.mapper.PictureMapper" >
+   <insert id="add" parameterType="Picture" useGeneratedKeys="true" keyProperty="id">
+      INSERT INTO picture (pic ,news_id,description,suffix)VALUES (#{pic,javaType=byte[], jdbcType=BLOB, typeHandler=org.apache.ibatis.type.BlobTypeHandler},#{news.nid},#{description},#{suffix})
+   </insert>
+   <select id="findPictureByNewsId" parameterType="java.lang.Integer" resultType="Picture">
+       SELECT id,pic ,description, suffix FROM  picture WHERE news_id = #{value}
+   </select>
+
+   <select id="findAllPicture" resultType="Picture">
+      SELECT id,pic ,description, suffix FROM  picture
+   </select>
+
+</mapper>
