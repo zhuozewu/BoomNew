@@ -46,7 +46,10 @@ public class NewsServiceImpl implements NewsService {
 
     public News findById(Integer id) {
         News news = newsMapper.findNewsById(id);
+        if(news.getPicUrl() != null){
         FileUploadUtil.pictureDownload(pictureMapper.findPictureByNewsId(id),savePath);
+        }
+
         return news;
     }
 

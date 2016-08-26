@@ -168,6 +168,21 @@
             <artifactId>aspectjweaver</artifactId>
             <version>1.7.4</version>
         </dependency>
+        <!--mybatis分页插件 pagehelper-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.0</version>
+        </dependency>
+
+        <!--sql解析工具 使用pagehelper所需要的jar包-->
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>0.9.4</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>BoomNew-maven</finalName>

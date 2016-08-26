@@ -24,6 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <th>发表时间</th>
         <th>内容</th>
         <th>回复数</th>
+        <th>图片</th>
         <th>评论</th>
       </tr>
       <tr>
@@ -32,7 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td>${news.postTime}</td>
         <td>${news.content}</td>
         <td>${news.replyCount}</td>
-        <td><a href="reply/${news.nid}">评论</a> </td>
+        <td><img src="${news.picUrl}"></td>
+        <td><a href="/replyInput/${news.author.id}_${news.nid}_-1">评论</a> </td>
       </tr>
     </table>
   </c:if>

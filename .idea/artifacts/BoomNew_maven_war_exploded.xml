@@ -39,6 +39,8 @@
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.9" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.7.4" />
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:4.1.0" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.4" />
         </element>
       </element>
       <element id="directory" name="META-INF">

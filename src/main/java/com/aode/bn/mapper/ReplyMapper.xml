@@ -52,7 +52,7 @@
     </select>
 
 
-    <select id="findAllNewsByUserId" parameterType="java.lang.Integer" resultMap="replyResultMap">
+    <select id="findAllReplyByUserId" parameterType="java.lang.Integer" resultMap="replyResultMap">
         SELECT
         u.id as author_id,
         u.name,
