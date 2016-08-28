@@ -14,6 +14,8 @@ public interface ReplyService {
 
     Reply findById(Integer id);
 
+    List<Reply> findAllReplyByReplyId(Integer rid );
+
     List<Reply> findAllReplyByNewsId(Integer nid);
 
     List<Reply> findAllReplyById(Integer id);

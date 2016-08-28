@@ -1,11 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<html>
 <head>
     <meta charset="utf-8">
+    <title></title>
+
     <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
 
     <!--[if ! lte IE 6]><!-->
@@ -27,6 +26,10 @@
     <link rel="stylesheet" href="../css/fancybox.css" type="text/css" media="screen" />
 </head>
 <body>
+
+
+</div><!-- end #header-top -->
+
 <div id="header">
 
     <div class="container">
@@ -42,9 +45,9 @@
                 <div style="font-size: larger;color: #9c163e"> 您目前为游客，请先<a href="${pageContext.request.contextPath}/login.jsp">登陆</a></div>
             </c:if>
             <c:if test="${!empty sessionScope.loginUser}">
-            <div style="font-size: larger;color: #9c163e">爆炸新闻网欢迎您 , ${loginUser.name}!</div>
+                <div style="font-size: larger;color: #9c163e">爆炸新闻网欢迎您 , ${loginUser.name}!</div>
             </c:if>
-        </div><!-- end #header-ads -->
+        </div>
 
     </div><!-- end .container -->
 
@@ -71,18 +74,13 @@
             </li>
             <li class="active"><a href="#">用户中心</a>
                 <ul>
-                    <li><a href="user/${sessionScope.kUSERID}">用户资料</a></li>
+                    <li><a href="userShow?userId=${sessionScope.kUSERID}">用户资料</a></li>
                     <li><a href="findReplyByUserId">用户评论</a></li>
                 </ul>
             </li>
         </ul>
 
-        <div id="search">
-
-            <input type="text" class="input" value="" placeholder="Keyword search here...">
-            <input type="submit" class="submit" value="Go">
-
-        </div><!-- end #search -->
+        <div id="search"></div><!-- end #search -->
 
     </div><!-- end .container -->
 
@@ -93,54 +91,41 @@
 <div id="content">
 
     <div class="container">
-        <c:if test="${empty requestScope.news }">
-            没有任何新闻信息
-        </c:if>
-        <div id="main" class="fullwidth">
 
-            <div class="entry single">
+        <div id="main">
 
-                <div class="entry-header">
+            <div class="entry collapsible">
+                <c:if test="${empty requestScope.user}">
+                    没有用户信息
+                </c:if>
+                <c:if test="${!empty requestScope.user}">
+                    <table width="1320" height="113" border="2" align="center" cellpadding="1" cellspacing="1">
+                        <tr>
+                            <th width="84"><strong><em>名字</em></strong></th>
+                            <th width="88"><em><strong>密码</strong></em></th>
+                            <th width="143"><strong><em>岗位</em></strong></th>
+                            <th width="191"><strong><em>查看用户所发表的评论</em></strong></th>
+                        </tr>
+                        <tr>
+                            <td width="84" align="center">${user.name}</td>
+                            <td width="88" align="center">${user.password }</td>
+                            <td width="143" align="center" >${user.role.roleName }</td>
+                            <td width="191" align="center"><blockquote>
+                              <p><a href="/findAllReplyByUserId/${user.id}">查看用户所发表的评论</a></p>
+                            </blockquote></td>
+                        </tr>
 
-                    <h2 class="title">新闻标题：<b style="font-size: 20px"> ${news.title}</b></h2>
+                    </table>
+                </c:if>
 
-                    <p class="meta">发表于 <b>${news.postTime}</b> 由 <b>${news.author.name}</b></p>
+            </div>
+        </div><!-- end #main --><!-- end #sidebar -->
 
-                </div><!-- end .entry-header -->
-
-                <div class="entry-content">
-                    <div class="zoom align-right">
-                        <a class="single_image" href="${news.picUrl}">
-                            <img src="${news.picUrl}" width="230" height="249" alt="Texas Trip 2010: Abandoned ranch" class="entry-image" />
-                        </a>
-                    </div>
-
-                    <p >${news.content}</p>
-                </div><!-- end .entry-content -->
-                <p style="text-align: center">>本新闻一共有<b>${news.replyCount}</b>个评论,<a href="/allReplyByNewsId/${news.author.id}_${news.nid}?key=0">点击查看评论</a> </p>
-
-                <div class="entry-footer">
-
-                    <strong class="align-left">Contact Us: &nbsp;</strong>
-
-                    <dl class="horizontal">
-                        <dt>Web:</dt>
-                        <dd>www.yourdomain.com <span class="separator">|</span></dd>
-                        <dt>Email:</dt>
-                        <dd>yourmail@yourdomain.com <span class="separator">|</span></dd>
-                        <dt>Phone:</dt>
-                        <dd>+88 44 777 99</dd>
-                    </dl>
-
-                </div><!-- end .entry-footer -->
-
-            </div><!-- end .entry -->
-        </div><!-- end #main -->
+        <div class="clear"></div>
 
     </div><!-- end .container -->
 
-</div><!-- end #content --><!-- end #footer --><!-- end #footer-bottom -->
-<!-- start scripts -->
+</div><!-- end #content --><!-- end #footer -->
 <!-- start scripts -->
 <script src="js/jquery.min-2.js"></script>
 <script src="js/jquery.cycle.all.min.js"></script>

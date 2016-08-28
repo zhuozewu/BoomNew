@@ -15,7 +15,11 @@ public interface NewsMapper {
     List<News> findAllNews();
     News findNewsById(Integer id);
 
+    List<String> findAllNewsType();
+
     void updateNews(News news);
 
     List<News> findAllNewsByUserId(Integer id);
+
+    List<News> findAllNewsByType(String type);
 }

@@ -10,9 +10,9 @@
 <body>
 <div class="page">
 	<div class="loginwarrp">
-		<div class="logo">登陆</div>
+		<div class="logo">员工登陆</div>
         <div class="login_form">
-			<form id="Login" name="Login" method="post" action="login">
+			<form id="Login" name="Login" method="post" action="InLogin">
 				<li class="login-item">
 					<span>用户名：</span>
 					<input type="text" name="name" class="login_input">
@@ -20,10 +20,6 @@
 				<li class="login-item">
 					<span>密　码：</span>
 					<input type="password" name="password" class="login_input">
-				</li>
-				<li class="login-item verify">
-					<span>如果你内部员工请点击此处：</span>
-					<a href="login-2.jsp">员工登陆</a>
 				</li>
 				<div class="clearfix"></div>
 				<li class="login-sub">

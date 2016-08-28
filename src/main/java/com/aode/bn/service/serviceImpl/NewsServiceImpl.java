@@ -7,6 +7,7 @@ import com.aode.bn.mapper.NewsMapper;
 import com.aode.bn.mapper.PictureMapper;
 import com.aode.bn.mapper.UserMapper;
 import com.aode.bn.service.NewsService;
+import com.aode.bn.util.DealWithNewsType;
 import com.aode.bn.util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,10 @@ public class NewsServiceImpl implements NewsService {
     @Autowired
     private PictureMapper pictureMapper ;
 
+    public List<String> findAllNewsType() {
+        return DealWithNewsType.removeDuplicate(newsMapper.findAllNewsType());
+    }
+
     public void addNews(News news) {
         news.setPostTime(new Date()); //设置新闻的发表时间
         newsMapper.addNews(news);
@@ -46,7 +51,7 @@ public class NewsServiceImpl implements NewsService {
 
     public News findById(Integer id) {
         News news = newsMapper.findNewsById(id);
-        if(news.getPicUrl() != null){
+        if(news.getPicUrl().equals(" ")){
         FileUploadUtil.pictureDownload(pictureMapper.findPictureByNewsId(id),savePath);
         }
 
@@ -80,5 +85,9 @@ public class NewsServiceImpl implements NewsService {
         for(Picture pic : picList){
             FileUploadUtil.pictureDownload(pic,savePath);
         }
+    }
+
+    public List<News> findAllNewsByType(String type) {
+        return newsMapper.findAllNewsByType(type);
     }
 }

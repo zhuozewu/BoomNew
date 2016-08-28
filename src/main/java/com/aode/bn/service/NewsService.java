@@ -11,6 +11,8 @@ import java.util.List;
  */
 @Service
 public interface NewsService {
+
+    List<String> findAllNewsType();
     void addNews(News news);
     List<News> findAllNews();
     void deleteNews(Integer id);
@@ -26,4 +28,7 @@ public interface NewsService {
     String findPictureByNewsId(Integer id );
 
     void upLoadAllPicture();
+
+    List<News> findAllNewsByType(String type);
+
 }

@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.aode.bn.mapper.PrivilegeMapper" >
    <select id="findAllprivilege" resultType="Privilege">
-       SELECT * FROM privilege ;
+       SELECT * FROM privilege
    </select>
 </mapper>

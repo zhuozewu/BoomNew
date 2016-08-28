@@ -14,9 +14,11 @@ public interface ReplyMapper {
 
     Reply findById(Integer id);
 
+    List<Reply> findAllReplyByReplyId(Integer rid);
+
     List<Reply> findAllReplyByNewsId(Integer nid);
 
-    List<Reply> findAllNewsByUserId(Integer id);
+    List<Reply> findAllReplyByUserId(Integer id);
 
     void updateReply(Reply reply);
 }

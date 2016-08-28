@@ -73,7 +73,9 @@
 		ON
 		  p.id = x.privilege_id
 		WHERE
-		  r.id = x.role_id;
+		  r.id = x.role_id
+		AND
+		  u.role_id=r.id
     </select>
     <update id="updateUser" parameterType="User">
         UPDATE user SET name =(#{name}),password =(#{password}),role_id = (#{role.id})

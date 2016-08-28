@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <td>${user.role.roleName }</td>
                           <td><a href="/findAllNewsByUserId/${user.id}">查看用户所发表的新闻</a></td>
                           <td><a href="/findAllReplyByUserId/${user.id}">查看用户所发表的评论</a></td>
-                          <td><a href="/userInput/${user.id}">修改</a></td>
+                          <td><a href="/userInput/${user.id}">7修改</a></td>
                           <td><a class="delete" href="/news/${news.nid }">删除</a></td>
                       </tr>
                   </c:forEach>

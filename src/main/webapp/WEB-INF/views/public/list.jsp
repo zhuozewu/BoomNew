@@ -41,10 +41,13 @@
         </h1>
 
         <div id="header-ads">
-
-            <a href="#?ref=smuliii"><img src="http://envato.s3.amazonaws.com/referrer_adverts/tf_468x60_v4.gif" alt="tf_468x60_v4" /></a>
-
-        </div><!-- end #header-ads -->
+            <c:if test="${empty sessionScope.loginUser}">
+                <div style="font-size: larger;color: #9c163e"> 您目前为游客，请先<a href="${pageContext.request.contextPath}/login.jsp">登陆</a></div>
+            </c:if>
+            <c:if test="${!empty sessionScope.loginUser}">
+                <div style="font-size: larger;color: #9c163e">爆炸新闻网欢迎您 , ${loginUser.name}!</div>
+            </c:if>
+        </div>
 
     </div><!-- end .container -->
 
@@ -55,27 +58,24 @@
     <div class="container">
 
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Categories</a>
-                <ul>
-                    <li><a href="#">Photography</a></li>
-                    <li><a href="#">Private Portfolios</a></li>
-                    <li><a href="#">My Travels</a></li>
-                    <li><a href="#">Family Travel Guide</a></li>
-                    <li><a href="#">Fly&amp;Drive Guides</a></li>
-                    <li><a href="#">Tropical Destinations</a></li>
-                    <li><a href="#">Mountain Destionations</a></li>
+            <li><a href="/newsList-2">新闻首页</a></li>
+            <li><a href="#">新闻分类</a>
+                    <ul>
+                <c:if test="${empty sessionScope.types }">
+                            <li>没有任何分类信息</li>
+                            </c:if>
+                <c:if test="${!empty sessionScope.types }">
+                    <c:forEach items="${sessionScope.types }" var="type" >
+
+                    <li><a href="/newsList-2?type=${type}">${type}</a></li>
+                        </c:forEach>
+                    </c:if>
                 </ul>
             </li>
-            <li><a href="#">Destinations</a></li>
-            <li><a href="#">Community</a></li>
-            <li class="active"><a href="#">Premade Pages</a>
+            <li class="active"><a href="#">用户中心</a>
                 <ul>
-                    <li><a href="single-post.html">Single Post</a></li>
-                    <li><a href="single-page.html">Single Page</a></li>
-                    <li><a href="archives.html">Archives</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="user/${sessionScope.kUSERID}">用户资料</a></li>
+                    <li><a href="findReplyByUserId">用户评论</a></li>
                 </ul>
             </li>
         </ul>
@@ -102,7 +102,7 @@
             <div class="entry collapsible">
 
                 <c:if test="${empty requestScope.newsList }">
-                    没有任何员工信息
+                    没有任何新闻信息
                 </c:if>
                     <c:if test="${!empty requestScope.newsList }">
                 <c:forEach items="${requestScope.newsList }" var="news" >

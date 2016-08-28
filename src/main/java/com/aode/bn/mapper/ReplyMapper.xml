@@ -19,6 +19,17 @@
         </association>
     </resultMap>
 
+    <resultMap id="replySonResultMap" type="Reply">
+        <id column="rid" property="rid"/>
+        <result column="content" property="content"/>
+        <result column="postTime" property="postTime"/>
+        <result column="replyCount" property="replyCount"/>
+        <association property="author" javaType="User">
+            <id column="author_id" property="id"/>
+            <result column="name" property="name"/>
+        </association>
+    </resultMap>
+
 
     <insert id="addReply" parameterType="Reply">
         INSERT INTO reply(content,postTime,news_id,author_id ,reply_id )
@@ -51,8 +62,12 @@
           r.rid = #{value }
     </select>
 
+    <update id="updateReply" parameterType="Reply">
+        UPDATE reply SET content =#{content},author_id =#{author.id},replyCount =#{replyCount}
+        WHERE rid = #{rid}
+    </update>
 
-    <select id="findAllReplyByUserId" parameterType="java.lang.Integer" resultMap="replyResultMap">
+    <select id="findAllReplyByReplyId" parameterType="java.lang.Integer" resultMap="replySonResultMap">
         SELECT
         u.id as author_id,
         u.name,
@@ -64,16 +79,10 @@
         FROM
         reply r ,user u
         WHERE
-        r.author_id = #{value }
+        r.author_id = u.id
         AND
-        u.id  = #{value }
+        r.reply_id  = #{VALUE }
     </select>
-
-
-    <update id="updateReply" parameterType="Reply">
-        UPDATE reply SET content =#{content},author_id =#{author.id},replyCount =#{replyCount}
-        WHERE rid = #{rid}
-    </update>
 
 
     <select id="findAllReplyByNewsId" parameterType="java.lang.Integer" resultMap="replyResultMap">
@@ -100,4 +109,26 @@
         WHERE
           r.news_id = #{value }
     </select>
+    <select id="findAllReplyByUserId" parameterType="java.lang.Integer" resultMap="replySonResultMap">
+        SELECT
+        u.id as author_id,
+        u.name,
+        r.rid,
+        r.content,
+        r.postTime,
+        r.replyCount
+        FROM
+        reply r
+        LEFT JOIN
+        user u
+        ON
+        u.id = r.author_id
+        LEFT JOIN
+        news n
+        ON
+        n.nid = r.news_id
+        WHERE
+        r.author_id = #{value }
+    </select>
+
 </mapper>

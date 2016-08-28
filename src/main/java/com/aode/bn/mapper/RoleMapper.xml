@@ -43,7 +43,7 @@
 		ON
 		  p.id = x.privilege_id
 		WHERE
-		  r.id = x.role_id;
+		  r.id = x.role_id
 
     </select>
 

@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <meta charset="utf-8">
@@ -37,13 +36,10 @@
         </h1>
 
         <div id="header-ads">
-            <c:if test="${empty sessionScope.loginUser}">
-                <div style="font-size: larger;color: #9c163e"> 您目前为游客，请先<a href="${pageContext.request.contextPath}/login.jsp">登陆</a></div>
-            </c:if>
-            <c:if test="${!empty sessionScope.loginUser}">
-                <div style="font-size: larger;color: #9c163e">爆炸新闻网欢迎您 , ${loginUser.name}!</div>
-            </c:if>
-        </div>
+
+            <a href="#?ref=smuliii"><img src="http://envato.s3.amazonaws.com/referrer_adverts/tf_468x60_v4.gif" alt="tf_468x60_v4" /></a>
+
+        </div><!-- end #header-ads -->
 
     </div><!-- end .container -->
 
@@ -51,28 +47,30 @@
 
 <div id="nav">
 
-
     <div class="container">
 
         <ul>
-            <li><a href="/newsList-2">新闻首页</a></li>
-            <li><a href="#">新闻分类</a>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Categories</a>
                 <ul>
-                    <c:if test="${empty sessionScope.types }">
-                        <li>没有任何分类信息</li>
-                    </c:if>
-                    <c:if test="${!empty sessionScope.types }">
-                        <c:forEach items="${sessionScope.types }" var="type" >
-
-                            <li><a href="/newsList-2?type=${type}">${type}</a></li>
-                        </c:forEach>
-                    </c:if>
+                    <li><a href="#">Photography</a></li>
+                    <li><a href="#">Private Portfolios</a></li>
+                    <li><a href="#">My Travels</a></li>
+                    <li><a href="#">Family Travel Guide</a></li>
+                    <li><a href="#">Fly&amp;Drive Guides</a></li>
+                    <li><a href="#">Tropical Destinations</a></li>
+                    <li><a href="#">Mountain Destionations</a></li>
                 </ul>
             </li>
-            <li class="active"><a href="#">用户中心</a>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">Community</a></li>
+            <li class="active"><a href="#">Premade Pages</a>
                 <ul>
-                    <li><a href="user/${sessionScope.kUSERID}">用户资料</a></li>
-                    <li><a href="findReplyByUserId">用户评论</a></li>
+                    <li><a href="single-post.html">Single Post</a></li>
+                    <li><a href="single-page.html">Single Page</a></li>
+                    <li><a href="archives.html">Archives</a></li>
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                 </ul>
             </li>
         </ul>
@@ -89,6 +87,7 @@
 </div><!-- end #nav -->
 
 <div id="nav-shadow"></div>
+
 <div id="content">
 
     <div class="container">
@@ -104,55 +103,51 @@
                 </div><!-- end .box-footer -->
 
             </div><!-- end .entry -->
-            <div id="comments">
+            <div class="box-header">
             <ol class="comments-list">
-            <c:if test="${empty requestScope.replys }">
-                没有任何员工信息
-            </c:if>
-            <c:if test="${!empty requestScope.replys }">
-            <c:forEach items="${requestScope.replys}" var="reply1">
-
                     <li class="comment">
-
+                        <c:if test="${empty requestScope.replys }">
+                            没有任何员工信息
+                        </c:if>
+                        <c:if test="${!empty requestScope.replys }">
+                        <c:forEach items="${requestScope.replys}" var="reply">
                         <div class="comment-avatar">
                             <img src="http://1.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=60" width="60" height="60" alt="Gravatar" class="avatar" />
                         </div>
+                        <!-- .comment-avatar -->
+
                         <div class="comment-body">
 
                             <div class="comment-meta">
 
-                                发表者：<b>${reply1.author.name}</b>, <span class="date">${reply1.postTime}</span>
+                                发表者：<b>${reply.author.name}</b>, <span class="date">${reply.postTime}</span>
 
                             </div>
                             <!-- .comment-meta -->
-                            <p>${reply1.content}</p>
-
-                            <c:if test="${!empty reply1.news}">
+                            <p>${reply.content}</p>
 
                             <ul class="comment-links">
-                                <li><a href="/replyInput/${sessionScope.kUSERID}_-1_${reply1.rid}">Reply</a></li>
-                                <li><a href="/findSonReplyByRid/${reply1.rid}">查看评论此评论的评论</a></li>
+                                <li><a href="/replyInput/1_-1_${reply.rid}">Reply</a></li>
                             </ul>
-                            </c:if>
                             <!-- .comment-links -->
 
                         </div>
                         <!-- .comment-body -->
-                </li>
-                </c:forEach>
-                     </c:if>
+                        </c:forEach>
+                        </c:if>
+                    </li>
+
             </ol>
-            </div>
+                </div>
 
             <ul class="pagination">
-                <li class="prev"><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_${sessionScope.nid}?page=${page.prePage}&&key=0">Prev</a></li>
-                <li><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_${sessionScope.nid}?page=${page.prePage}&&key=0">${page.prePage}</a></li>
+                <li class="prev"><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_-1?page=${page.prePage}">Prev</a></li>
+                <li><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_-1?page=${page.prePage}">${page.prePage}</a></li>
                 <li class="active"><a href="#">${page.pageNum}</a></li>
-                <li><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_${sessionScope.nid}?page=${page.nextPage}&&key=0">${page.nextPage}</a></li>
-                <li class="next"><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_${sessionScope.nid}?page=${page.nextPage}&&key=0">Next</a></li>
+                <li><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_-1?page=${page.nextPage}">${page.nextPage}</a></li>
+                <li class="next"><a href="${pageContext.request.contextPath}/allReplyByNewsId/-1_-1?page=${page.nextPage}">Next</a></li>
             </ul>
 
-            <c:if test="${!empty sessionScope.nid}">
             <div id="respond" class="box">
 
                 <div class="box-header">
@@ -164,18 +159,28 @@
                     </p>
 
                 </div>
-                <div class="align-left">
-                <form  method="post" action="${pageContext.request.contextPath }/reply" id="comment-form" class="form clearfix">
+
+                <form method="post" action="${pageContext.request.contextPath }/reply" id="comment-form" class="form clearfix" modelAttribute="reply" method="POST">
+                    <div class="textarea_block">
+                        <c:if test="${reply.rid !=null}">
+                            <form:hidden path="rid"/>
+                            <input type="hidden" name="_method" value="PUT"/>
+                        </c:if>
 
                         <p>
                             <label for="comment">Comments <span>(Use valid HTML tags)</span></label>
-                            <textarea id="comment" rows="10" cols="45" name="content"></textarea>
+                            <form:textarea path="content" id="comment" rows="10" cols="45" class="input"/>
                         </p>
-                            <input type="submit" value="Submit"/>
+
+                        <p>
+                            <input type="submit" name="submit" value="Submit" class="submit" />
+                        </p>
+
+                    </div>
+
                 </form>
-                </div>
+
             </div><!-- end #respond --><!-- end #main --><!-- end #sidebar -->
-            </c:if>
 
         </div>
         <div class="clear"></div>
