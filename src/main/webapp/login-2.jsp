@@ -6,13 +6,14 @@
 	<title>login</title>
 	<link rel="stylesheet" href="css/reset.css" />
 	<link rel="stylesheet" href="css/login.css" />
+
 </head>
 <body>
 <div class="page">
 	<div class="loginwarrp">
 		<div class="logo">员工登陆</div>
         <div class="login_form">
-			<form id="Login" name="Login" method="post" action="InLogin">
+			<form id="Login" name="Login" method="post" action="inLogin">
 				<li class="login-item">
 					<span>用户名：</span>
 					<input type="text" name="name" class="login_input">
