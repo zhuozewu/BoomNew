@@ -81,4 +81,8 @@
         UPDATE user SET name =(#{name}),password =(#{password}),role_id = (#{role.id})
         WHERE id = #{id}
     </update>
+
+    <update id="setRoleToNullByRoleId" parameterType="java.lang.Integer">
+        UPDATE user SET role_id = NULL WHERE role_id =#{VALUE }
+    </update>
 </mapper>

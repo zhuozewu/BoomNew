@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -20,6 +21,7 @@ import java.util.Set;
 public class AdminController {
     @Autowired
     private UserService userService ;
+
     @RequestMapping("inLogin")
     public String inLogin(User loginuser,HttpSession session){
         User user = userService.findByLoginNameAndPassword(loginuser);
@@ -32,11 +34,36 @@ public class AdminController {
             Set<String> privileges = new HashSet<String>();
             for (Privilege privilege:user.getRole().getPrivileges()){
                 privileges.add(privilege.getUrl());
+                System.out.println(privilege.getPrivilege());
             }
 
             session.setAttribute(AuthInterceptor.SESSION_AUTHS,privileges);
-            return "admin/index";
+            return "redirect:/forWard";
         }
+    }
+
+    @RequestMapping("forWard")
+    public String forWard(){
+        return "admin/index";
+    }
+
+
+    @RequestMapping("userInput-2")
+    public String input(Map<String,Object> map){
+        map.put("user",new User());
+        return "user/editUI-2";
+    }
+
+    @RequestMapping("addUser")
+    public String input(User user){
+        userService.addUser(user);
+        return "redirect:/newsList-2";
+    }
+
+    @RequestMapping("logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginUser");
+        return "user/success";
     }
 
 }

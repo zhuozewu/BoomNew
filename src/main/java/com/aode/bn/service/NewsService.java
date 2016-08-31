@@ -20,6 +20,7 @@ public interface NewsService {
 
     void updateNews(News news);
 
+
     List<News> findAllNewsByUserId(Integer id);
 
     void addPicture(Picture pic);
@@ -31,4 +32,5 @@ public interface NewsService {
 
     List<News> findAllNewsByType(String type);
 
+    void deletePicByNewsId(Integer id);
 }

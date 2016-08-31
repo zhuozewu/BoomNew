@@ -19,7 +19,7 @@
               <h3>修改网站配置</h3>
           </div>
           <div class="public-content-cont">
-              <form:form action="${pageContext.request.contextPath }/user" modelAttribute="user" method="POST" acceptCharset="utf-8" enctype="multipart/form-data">
+              <form:form action="${pageContext.request.contextPath }/addUser" modelAttribute="user" method="POST" acceptCharset="utf-8" enctype="multipart/form-data">
 
                   <c:if test="${user.id !=null}">
                       <form:hidden path="id"/>
@@ -32,12 +32,6 @@
                   <div class="form-group">
                       <label  >密码</label>
                       <form:input path="password" class="form-input-txt"/>
-                  </div>
-
-                  <div class="form-group">
-                      <label  >岗位</label>
-                      <form:select path="role.id" items = "${roles}" itemLabel="roleName" itemValue="id">
-                      </form:select>
                   </div>
                   <div class="form-group" style="margin-left:150px;">
                       <input type="submit" class="sub-btn" value="提  交" />

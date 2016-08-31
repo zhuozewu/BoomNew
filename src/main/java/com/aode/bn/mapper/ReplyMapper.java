@@ -21,4 +21,8 @@ public interface ReplyMapper {
     List<Reply> findAllReplyByUserId(Integer id);
 
     void updateReply(Reply reply);
+
+    void deleteReplyByUserId(Integer id);
+
+    void deleteReplyByNewsId(Integer id);
 }

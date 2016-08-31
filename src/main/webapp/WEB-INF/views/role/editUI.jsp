@@ -18,7 +18,7 @@
             <h3>修改网站配置</h3>
         </div>
         <div class="public-content-cont">
-            <form:form action="${pageContext.request.contextPath }/role" modelAttribute="role" method="POST" acceptCharset="utf-8">
+            <form:form action="${pageContext.request.contextPath }/role" modelAttribute="role" method="POST" acceptCharset="utf-8" enctype="multipart/form-data">
 
                 <c:if test="${role.id !=null}">
                     <form:hidden path="id"/>

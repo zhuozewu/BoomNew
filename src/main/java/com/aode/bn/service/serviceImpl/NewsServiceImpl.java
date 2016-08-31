@@ -5,6 +5,7 @@ import com.aode.bn.domain.News;
 import com.aode.bn.domain.Picture;
 import com.aode.bn.mapper.NewsMapper;
 import com.aode.bn.mapper.PictureMapper;
+import com.aode.bn.mapper.ReplyMapper;
 import com.aode.bn.mapper.UserMapper;
 import com.aode.bn.service.NewsService;
 import com.aode.bn.util.DealWithNewsType;
@@ -28,6 +29,9 @@ public class NewsServiceImpl implements NewsService {
     private NewsMapper newsMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ReplyMapper replyMapper;
+
 
     @Autowired
     private PictureMapper pictureMapper ;
@@ -46,6 +50,7 @@ public class NewsServiceImpl implements NewsService {
     }
 
     public void deleteNews(Integer id) {
+        replyMapper.deleteReplyByNewsId(id);
         newsMapper.deleteNews(id);
     }
 
@@ -60,6 +65,10 @@ public class NewsServiceImpl implements NewsService {
 
     public void updateNews(News news) {
         newsMapper.updateNews(news);
+    }
+
+    public void deletePicById(Integer id) {
+        pictureMapper.deletePicById(id);
     }
 
     public List<News> findAllNewsByUserId(Integer id) {
@@ -89,5 +98,9 @@ public class NewsServiceImpl implements NewsService {
 
     public List<News> findAllNewsByType(String type) {
         return newsMapper.findAllNewsByType(type);
+    }
+
+    public void deletePicByNewsId(Integer id) {
+        pictureMapper.deletePicByNewsId(id);
     }
 }

@@ -131,4 +131,10 @@
         r.author_id = #{value }
     </select>
 
+    <delete id="deleteReplyByUserId" parameterType="java.lang.Integer">
+        DELETE  FROM reply WHERE  author_id = #{VALUE }
+    </delete>
+    <delete id="deleteReplyByNewsId" parameterType="java.lang.Integer">
+        DELETE  FROM reply WHERE  news_id = #{VALUE }
+    </delete>
 </mapper>

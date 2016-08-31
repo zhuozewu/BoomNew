@@ -4,27 +4,25 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
+      <base href="<%=basePath%>">
+      <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+            <script type="text/javascript">
+                $(function(){
+                        $(".delete").click(function(){
+                               var href = $(this).attr("href");
+                               $("#DELETE").attr("action", href).submit();
+                               return false;
+                          });
+                   })
+            </script>
       <link rel="stylesheet" href="../css/reset.css" />
       <link rel="stylesheet" href="../css/content.css" />
-      <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
-      <script type="text/javascript">
-          $(function(){
-              $(".delete").click(function(){
-                  var href = $(this).attr("href");
-                  $("form").attr("action", href).submit();
-                  return false;
-              });
-          })
-      </script>
   </head>
 
   <body marginwidth="0" marginheight="0">
-    <form action="" method="POST">
+    <form id="DELETE" action="" method="POST">
         <input type="hidden" name="_method" value="DELETE"/>
     </form>
     <div class="container">

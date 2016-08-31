@@ -14,4 +14,9 @@
       SELECT id,pic ,description, suffix FROM  picture
    </select>
 
+
+   <delete id="deletePicByNewsId" parameterType="java.lang.Integer">
+      DELETE FROM picture WHERE news_id = #{VALUE }
+   </delete>
+
 </mapper>

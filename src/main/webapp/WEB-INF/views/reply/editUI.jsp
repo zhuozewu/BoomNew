@@ -118,7 +118,7 @@
 
                 </div>
 
-                <form method="post" action="${pageContext.request.contextPath }/reply" id="comment-form" class="form clearfix" modelAttribute="reply" method="POST">
+                <form method="post" action="${pageContext.request.contextPath }/reply" id="comment-form" class="form clearfix" modelAttribute="reply" method="POST" enctype="multipart/form-data">
                     <div class="input_block">
                         <p>
                             <label for="comment">Comments <span>(Use valid HTML tags)</span></label>

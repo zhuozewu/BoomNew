@@ -18,4 +18,6 @@ public interface UserMapper {
     void updateUser(User user);
     User findById(Integer id);
     void deleteUser(Integer id);
+
+    void setRoleToNullByRoleId(Integer id);
 }

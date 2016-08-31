@@ -20,5 +20,6 @@ public interface RoleMapper {
 
     void deleteRole(Integer id);
 
-    void updateRole(Integer id);
+    void updateRole(Role role);
+
 }

@@ -15,4 +15,8 @@ public interface PictureMapper {
     Picture findPictureByNewsId(Integer nid);
 
     List<Picture> findAllPicture();
+
+    void deletePicById(Integer id);
+
+    void deletePicByNewsId(Integer id);
 }

@@ -42,10 +42,10 @@
 
         <div id="header-ads">
             <c:if test="${empty sessionScope.loginUser}">
-                <div style="font-size: larger;color: #9c163e"> 您目前为游客，请先<a href="${pageContext.request.contextPath}/login.jsp">登陆</a></div>
+                <div style="font-size: larger;color: #9c163e"> 您目前为游客，请先<a href="${pageContext.request.contextPath}/login.jsp">登陆</a>|<a href="${pageContext.request.contextPath}/userInput-2">注册</a> </div>
             </c:if>
             <c:if test="${!empty sessionScope.loginUser}">
-                <div style="font-size: larger;color: #9c163e">爆炸新闻网欢迎您 , ${loginUser.name}!</div>
+                <div style="font-size: larger;color: #9c163e">爆炸新闻网欢迎您 , ${loginUser.name}! | <a href="${pageContext.request.contextPath}/logout">注销</a> </div>
             </c:if>
         </div>
 

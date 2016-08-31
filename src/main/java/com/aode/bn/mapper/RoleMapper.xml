@@ -21,6 +21,11 @@
         VALUE (#{roleName},#{description})
     </insert>
 
+    <update id="updateRole" parameterType="Role" useGeneratedKeys="true" keyProperty="id">
+        UPDATE role SET role_name = #{roleName},description =#{description}
+        WHERE id = #{id}
+    </update>
+
     <insert id="insertKFTable">
         INSERT INTO role_privilege(role_id,privilege_id)
         VALUE (#{0},#{1})
@@ -49,6 +54,10 @@
 
 
     <select id="findRoleById" parameterType="java.lang.Integer" resultType="Role">
-        SELECT * FROM role WHERE  id = #{value } ;
+        SELECT * FROM role WHERE  id = #{value }
     </select>
+
+    <delete id="deleteRole" parameterType="java.lang.Integer" >
+        DELETE FROM role WHERE id =#{VALUE }
+    </delete>
 </mapper>

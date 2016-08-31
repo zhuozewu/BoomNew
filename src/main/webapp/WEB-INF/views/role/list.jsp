@@ -11,12 +11,12 @@
     <base href="<%=basePath%>">
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/content.css" />
-    <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/scripts/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $(".delete").click(function(){
                 var href = $(this).attr("href");
-                $("form").attr("action", href).submit();
+                $("#DELETE").attr("action", href).submit();
                 return false;
             });
         })
@@ -24,7 +24,7 @@
 </head>
 
 <body marginwidth="0" marginheight="0">
-<form action="" method="POST">
+<form id="DELETE" action="" method="POST">
     <input type="hidden" name="_method" value="DELETE"/>
 </form>
 <div class="container">
@@ -57,7 +57,7 @@
                         </c:forEach>
                         </td>
                         <td><a href="/roleInput/${role.id }" >修改</a></td>
-                        <td><a class="delete" href="/role/${role.id }">删除</a></td>
+                        <td><a class="delete" href="role/${role.id }">删除</a></td>
                     </tr>
                 </c:forEach>
             </table>

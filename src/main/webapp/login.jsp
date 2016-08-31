@@ -12,7 +12,7 @@
 	<div class="loginwarrp">
 		<div class="logo">登陆</div>
         <div class="login_form">
-			<form id="Login" name="Login" method="post" action="login">
+			<form id="Login" name="Login" method="post" action="login" enctype="multipart/form-data">
 				<li class="login-item">
 					<span>用户名：</span>
 					<input type="text" name="name" class="login_input">

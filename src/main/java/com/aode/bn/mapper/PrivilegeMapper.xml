@@ -6,4 +6,8 @@
    <select id="findAllprivilege" resultType="Privilege">
        SELECT * FROM privilege
    </select>
+
+    <delete id="deleteRoleAndPrivilegeByRoleId" parameterType="java.lang.Integer">
+        DELETE FROM role_privilege WHERE role_id = #{VALUE }
+    </delete>
 </mapper>

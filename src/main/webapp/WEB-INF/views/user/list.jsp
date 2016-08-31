@@ -1,11 +1,10 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -17,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           $(function(){
               $(".delete").click(function(){
                   var href = $(this).attr("href");
-                  $("form").attr("action", href).submit();
+                  $(".Delete").attr("action", href).submit();
                   return false;
               });
           })
@@ -25,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
 
   <body marginwidth="0" marginheight="0">
-  <form action="" method="POST">
+  <form  class="Delete" action="" method="POST">
       <input type="hidden" name="_method" value="DELETE"/>
   </form>
   <div class="container">
@@ -56,8 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                           <td>${user.role.roleName }</td>
                           <td><a href="/findAllNewsByUserId/${user.id}">查看用户所发表的新闻</a></td>
                           <td><a href="/findAllReplyByUserId/${user.id}">查看用户所发表的评论</a></td>
-                          <td><a href="/userInput/${user.id}">7修改</a></td>
-                          <td><a class="delete" href="/news/${news.nid }">删除</a></td>
+                          <td><a href="/userInput/${user.id}">修改</a></td>
+                          <td><a class="delete" href="/user/${user.id}">删除</a></td>
                       </tr>
                   </c:forEach>
               </table>

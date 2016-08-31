@@ -1,6 +1,7 @@
 package com.aode.bn.service.serviceImpl;
 
 import com.aode.bn.domain.User;
+import com.aode.bn.mapper.ReplyMapper;
 import com.aode.bn.mapper.UserMapper;
 import com.aode.bn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private ReplyMapper replyMapper ;
+
 
     public User findByName(String name) {
 
@@ -29,9 +33,13 @@ public class UserServiceImpl implements UserService{
     }
 
     public User findByLoginNameAndPassword(User user) {
-        if(!user.getPassword().equals(findByName(user.getName()).getPassword())){
-            System.out.println("密码错了");
+
+        if(userMapper.findUserByName(user.getName())==null){
+            System.out.println("找不到该用户");
             return null;
+        }else if (!user.getPassword().equals(findByName(user.getName()).getPassword())){
+                System.out.println("密码错了");
+                return null;
         }else {
             return userMapper.findUserByName(user.getName());
         }
@@ -51,6 +59,7 @@ public class UserServiceImpl implements UserService{
     }
 
     public void deleteUser(Integer id) {
+        replyMapper.deleteReplyByUserId(id);
         userMapper.deleteUser(id);
     }
 }

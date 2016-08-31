@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
 
-    <!-- 配置Spring字符编码过滤器  此段编码设置必须在所有filter的前面，否则过滤器有可能不起作用。-->
+    <!-- 配置Spring字符编码过滤器  此段编码设置必须在所有filter的前面，否则过滤器有可能不起作用。
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -17,9 +17,20 @@
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/</url-pattern>
+    </filter-mapping>-->
+
+    <!-- 配置 HiddenHttpMethodFilter: 把 POST 请求转为 DELETE、PUT 请求 -->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <servlet-name>springmvc</servlet-name>
     </filter-mapping>
 
-    <!-- get method url encode -->
+    <!-- get method url encode
     <filter>
         <filter-name>getMethodEncodingFilter</filter-name>
         <filter-class>com.aode.bn.util.GetMethodEncodingFilter</filter-class>
@@ -27,7 +38,7 @@
     <filter-mapping>
         <filter-name>getMethodEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <!-- spring的配置 -->
     <context-param>
@@ -55,15 +66,5 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <!-- 配置 HiddenHttpMethodFilter: 把 POST 请求转为 DELETE、PUT 请求 -->
-    <filter>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>HiddenHttpMethodFilter</filter-name>
-        <servlet-name>springmvc</servlet-name>
-    </filter-mapping>
 
 </web-app>
